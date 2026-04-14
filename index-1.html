@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>راہِ حق — Rah e Haq v2</title>
+<meta name="application-name" content="Rah e Haq"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="راہِ حق"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="theme-color" content="#07090D"/>
+<meta name="description" content="Fiqah-e-Jafaria Scholarly Debate Engine"/>
+<link rel="manifest" id="pwaManifest"/>
+<link rel="apple-touch-icon" id="appleIcon"/>
+<link rel="icon" type="image/png" id="faviconIcon"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --gold:#C8A84B;--gold-light:#E8C96A;--gold-dim:#8A6F2E;
+  --deep:#07090D;--panel:#0F1318;--panel2:#141A24;--panel3:#1A2030;
+  --border:rgba(200,168,75,0.15);--border-hi:rgba(200,168,75,0.45);
+  --text:#E8E2D5;--text-dim:#7A7468;
+  --green:#4CAF7A;--amber:#E8A020;--red:#E05555;--blue:#5B8FD4;
+  --sb:290px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;overflow:hidden;}
+body{background:var(--deep);color:var(--text);font-family:'Lato',sans-serif;display:flex;flex-direction:column;}
+body.light{--deep:#F0EDE6;--panel:#E8E4DC;--panel2:#DDD9D0;--panel3:#D0CBc0;--text:#1A1410;--text-dim:#6A6458;--border:rgba(139,100,20,0.2);--border-hi:rgba(139,100,20,0.5);}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse at 15% 10%,rgba(200,168,75,0.05) 0%,transparent 45%),
+    radial-gradient(ellipse at 85% 90%,rgba(91,143,212,0.04) 0%,transparent 45%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cg fill='none' stroke='rgba(200,168,75,0.032)' stroke-width='0.6'%3E%3Cpolygon points='50,8 66,20 66,44 50,56 34,44 34,20'/%3E%3Cpolygon points='50,20 60,27 60,43 50,50 40,43 40,27'/%3E%3Cline x1='50' y1='8' x2='50' y2='56'/%3E%3Cline x1='34' y1='20' x2='66' y2='44'/%3E%3Cline x1='66' y1='20' x2='34' y2='44'/%3E%3C/g%3E%3C/svg%3E");}
+@keyframes glow{from{text-shadow:0 0 15px rgba(200,168,75,0.3);}to{text-shadow:0 0 35px rgba(200,168,75,0.8),0 0 60px rgba(200,168,75,0.15);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(9px);}to{opacity:1;transform:translateY(0);}}
+@keyframes bounce{0%,80%,100%{transform:scale(.5);opacity:.3;}40%{transform:scale(1);opacity:1;}}
+@keyframes pulse{0%,100%{opacity:.4;}50%{opacity:1;}}
+@keyframes micpulse{0%,100%{box-shadow:0 0 0 0 rgba(224,85,85,0.4);}50%{box-shadow:0 0 0 9px rgba(224,85,85,0);}}
+@keyframes vwave{0%,100%{transform:scaleY(0.35);}50%{transform:scaleY(1);}}
+@keyframes scoreIn{from{transform:scale(0.5);opacity:0;}to{transform:scale(1);opacity:1;}}
+
+/* HEADER */
+.top-header{position:relative;z-index:20;display:flex;align-items:center;padding:0 14px;height:56px;gap:10px;flex-shrink:0;background:rgba(7,9,13,0.97);border-bottom:1px solid var(--border);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px;background:none;border:none;}
+.hamburger span{display:block;width:21px;height:2px;background:var(--gold-dim);border-radius:2px;transition:.2s;}
+.logo-ar{font-family:'Amiri',serif;font-size:1.5rem;color:var(--gold-light);line-height:1;animation:glow 3s ease-in-out infinite alternate;}
+.logo-div{width:1px;height:24px;background:var(--border);margin:0 2px;}
+.logo-en{display:flex;flex-direction:column;}
+.logo-title{font-family:'Cinzel Decorative',cursive;font-size:0.78rem;color:var(--gold);letter-spacing:0.1em;}
+.logo-sub{font-family:'Cinzel',serif;font-size:0.52rem;color:var(--text-dim);letter-spacing:0.18em;text-transform:uppercase;}
+.hdr-right{display:flex;align-items:center;gap:6px;margin-left:auto;}
+.new-btn{font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:0.12em;text-transform:uppercase;padding:5px 11px;border-radius:3px;border:1px solid var(--border-hi);background:rgba(200,168,75,0.08);color:var(--gold);cursor:pointer;transition:.2s;white-space:nowrap;}
+.new-btn:hover{background:rgba(200,168,75,0.18);}
+.icon-btn{width:32px;height:32px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text-dim);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.95rem;transition:.2s;}
+.icon-btn:hover{border-color:var(--gold-dim);color:var(--gold);}
+.lang-sel{background:var(--panel2);border:1px solid var(--border);color:var(--text-dim);font-family:'Lato',sans-serif;font-size:0.72rem;padding:4px 6px;border-radius:3px;cursor:pointer;outline:none;max-width:110px;}
+.lang-sel option{background:var(--panel2);}
+
+/* LAYOUT */
+.layout{display:flex;flex:1;overflow:hidden;position:relative;z-index:5;}
+
+/* SIDEBAR */
+.sidebar{width:var(--sb);flex-shrink:0;background:rgba(9,11,17,0.98);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;transition:transform .28s ease;}
+.sb-head{padding:12px 13px 8px;border-bottom:1px solid var(--border);font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-dim);}
+.sb-list{flex:1;overflow-y:auto;padding:6px;}
+.sitem{padding:9px 11px;border-radius:5px;border:1px solid transparent;cursor:pointer;transition:.18s;margin-bottom:3px;position:relative;}
+.sitem:hover{background:var(--panel2);border-color:var(--border);}
+.sitem.active{background:rgba(200,168,75,0.07);border-color:var(--border-hi);}
+.sitem-title{font-size:0.78rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px;}
+.sitem.active .sitem-title{color:var(--gold);}
+.sitem-meta{font-size:0.63rem;color:var(--text-dim);display:flex;align-items:center;gap:6px;}
+.sitem-score{font-size:0.6rem;padding:1px 5px;border-radius:3px;background:rgba(76,175,122,0.15);border:1px solid rgba(76,175,122,0.3);color:var(--green);}
+.sitem-del{position:absolute;right:6px;top:50%;transform:translateY(-50%);opacity:0;color:var(--red);font-size:0.75rem;background:none;border:none;cursor:pointer;padding:3px 5px;border-radius:3px;}
+.sitem:hover .sitem-del{opacity:0.5;}
+.sitem-del:hover{opacity:1!important;background:rgba(224,85,85,0.12);}
+.sb-empty{padding:20px 12px;font-size:0.7rem;color:var(--text-dim);text-align:center;font-family:'Cinzel',serif;letter-spacing:0.08em;line-height:1.8;}
+.sb-bottom{padding:10px;border-top:1px solid var(--border);overflow-y:auto;max-height:52vh;}
+.ql{font-family:'Cinzel',serif;font-size:0.56rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-dim);margin-bottom:6px;margin-top:8px;}
+.ql:first-child{margin-top:0;}
+.chips-col{display:flex;flex-direction:column;gap:3px;}
+.chip-s{font-size:0.71rem;padding:6px 9px;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--text-dim);cursor:pointer;transition:.18s;text-align:left;line-height:1.3;width:100%;}
+.chip-s:hover{border-color:var(--gold-dim);color:var(--gold);background:rgba(200,168,75,0.04);}
+.chip-s.r{border-color:rgba(232,160,32,0.2);color:#907010;}
+.chip-s.r:hover{border-color:var(--amber);color:var(--amber);}
+.chip-s.cat{border-color:rgba(91,143,212,0.2);color:#4070A0;}
+.chip-s.cat:hover{border-color:var(--blue);color:var(--blue);}
+.sb-actions{display:flex;flex-direction:column;gap:4px;padding:10px;border-top:1px solid var(--border);}
+.sb-act-btn{font-family:'Cinzel',serif;font-size:0.57rem;letter-spacing:0.13em;text-transform:uppercase;padding:7px 10px;border-radius:3px;border:1px solid var(--border);background:transparent;color:var(--text-dim);cursor:pointer;transition:.18s;width:100%;text-align:left;}
+.sb-act-btn:hover{border-color:var(--gold-dim);color:var(--gold);}
+
+/* CHAT */
+.chat-area{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.mode-bar{display:flex;gap:5px;padding:8px 14px;border-bottom:1px solid var(--border);background:rgba(7,9,13,0.55);flex-wrap:wrap;align-items:center;flex-shrink:0;}
+.ml{font-family:'Cinzel',serif;font-size:0.56rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-dim);margin-right:2px;}
+.mode-btn{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;padding:4px 11px;border-radius:3px;border:1px solid var(--border);background:transparent;color:var(--text-dim);cursor:pointer;transition:.18s;}
+.mode-btn:hover{border-color:var(--gold-dim);color:var(--gold);}
+.mode-btn.active{border-color:var(--gold);background:rgba(200,168,75,0.09);color:var(--gold);}
+
+/* MESSAGES */
+.msgs{flex:1;overflow-y:auto;padding:18px 14px;display:flex;flex-direction:column;gap:14px;scroll-behavior:smooth;}
+
+/* WELCOME */
+.welcome{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px 12px;gap:14px;min-height:50vh;}
+.wbism{font-family:'Amiri',serif;font-size:clamp(1.3rem,4vw,2rem);color:var(--gold-light);animation:glow 3s ease-in-out infinite alternate;}
+.wtitle{font-family:'Cinzel Decorative',cursive;font-size:clamp(0.85rem,2.5vw,1.3rem);color:var(--gold);letter-spacing:0.1em;}
+.wsub{font-family:'Cinzel',serif;font-size:0.7rem;color:var(--text-dim);letter-spacing:0.15em;text-transform:uppercase;max-width:440px;line-height:1.9;}
+.wdiv{display:flex;align-items:center;gap:10px;width:100%;max-width:340px;}
+.wdiv::before,.wdiv::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);}
+.wdiv span{color:var(--gold);}
+.qgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:7px;width:100%;max-width:640px;}
+.qcard{padding:10px 12px;border-radius:6px;border:1px solid var(--border);background:var(--panel2);cursor:pointer;transition:.2s;text-align:left;}
+.qcard:hover{border-color:var(--gold-dim);background:rgba(200,168,75,0.06);transform:translateY(-2px);}
+.qcard-icon{font-size:0.95rem;margin-bottom:3px;}
+.qcard-title{font-family:'Cinzel',serif;font-size:0.68rem;color:var(--gold);letter-spacing:0.06em;margin-bottom:2px;}
+.qcard-desc{font-size:0.65rem;color:var(--text-dim);line-height:1.4;}
+
+/* MESSAGES */
+.msg{display:flex;gap:9px;animation:fadeUp .3s ease forwards;}
+.msg.user{flex-direction:row-reverse;}
+.mavatar{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:0.88rem;}
+.msg.user .mavatar{background:rgba(200,168,75,0.13);border:1px solid var(--border-hi);color:var(--gold);}
+.msg.ai   .mavatar{background:rgba(91,143,212,0.11);border:1px solid rgba(91,143,212,0.28);color:var(--blue);}
+.mbody{flex:1;max-width:88%;}
+.msg.user .mbody{display:flex;flex-direction:column;align-items:flex-end;}
+.mbubble{padding:11px 15px;border-radius:8px;line-height:1.78;font-size:0.86rem;}
+.msg.user .mbubble{background:rgba(200,168,75,0.09);border:1px solid rgba(200,168,75,0.22);color:var(--text);border-radius:8px 2px 8px 8px;}
+.msg.ai   .mbubble{background:var(--panel2);border:1px solid var(--border);color:var(--text);border-radius:2px 8px 8px 8px;}
+.mtime{font-size:0.6rem;color:var(--text-dim);margin-top:3px;padding:0 3px;}
+.msg-actions{display:flex;gap:5px;margin-top:5px;flex-wrap:wrap;}
+
+/* AI CONTENT */
+.msg.ai .mbubble h2{font-family:'Cinzel',serif;font-size:0.76rem;letter-spacing:0.13em;text-transform:uppercase;margin:14px 0 6px;padding-bottom:5px;border-bottom:1px solid var(--border);color:var(--gold);}
+.msg.ai .mbubble h2:first-child{margin-top:0;}
+.msg.ai .mbubble h2.g{color:var(--green);}
+.msg.ai .mbubble h2.a{color:var(--amber);border-color:rgba(232,160,32,0.22);}
+.msg.ai .mbubble h2.b{color:var(--blue);}
+.msg.ai .mbubble h2.r{color:var(--red);border-color:rgba(224,85,85,0.22);}
+.msg.ai .mbubble h3{font-family:'Cinzel',serif;font-size:0.71rem;color:var(--gold-light);margin:10px 0 5px;letter-spacing:0.07em;}
+.msg.ai .mbubble p{margin-bottom:8px;}
+.msg.ai .mbubble p:last-child{margin-bottom:0;}
+.msg.ai .mbubble strong{color:var(--gold-light);}
+.msg.ai .mbubble em{color:var(--text-dim);}
+.cblock{background:rgba(200,168,75,0.04);border-left:3px solid var(--gold-dim);border-radius:0 4px 4px 0;padding:8px 12px;margin:7px 0;font-family:'Amiri',serif;font-size:0.88rem;line-height:1.85;color:#D4C898;}
+.conc{margin-top:11px;padding:11px 15px;background:linear-gradient(135deg,rgba(200,168,75,0.07),rgba(91,143,212,0.04));border:1px solid var(--border-hi);border-radius:5px;font-family:'Cinzel',serif;font-size:0.74rem;color:var(--gold-light);letter-spacing:0.04em;line-height:1.75;}
+.conc::before{content:'الخلاصة — CONCLUSION';display:block;font-size:0.56rem;letter-spacing:0.23em;color:var(--gold-dim);margin-bottom:6px;}
+
+/* SCORE CARD */
+.score-card{margin-top:10px;padding:12px 15px;border-radius:8px;border:1px solid var(--border);background:var(--panel3);animation:scoreIn .4s ease forwards;}
+.score-header{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-dim);margin-bottom:8px;}
+.score-bars{display:flex;flex-direction:column;gap:5px;}
+.score-row{display:flex;align-items:center;gap:8px;}
+.score-label{font-family:'Cinzel',serif;font-size:0.6rem;color:var(--text-dim);width:80px;flex-shrink:0;}
+.score-bar-wrap{flex:1;height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;}
+.score-bar-fill{height:100%;border-radius:3px;transition:width 1s ease;}
+.score-num{font-family:'Cinzel',serif;font-size:0.65rem;color:var(--gold);width:24px;text-align:right;}
+.score-total{margin-top:8px;text-align:center;font-family:'Cinzel Decorative',cursive;font-size:1rem;color:var(--gold-light);}
+.score-verdict{font-family:'Cinzel',serif;font-size:0.65rem;color:var(--text-dim);letter-spacing:0.1em;text-align:center;margin-top:3px;}
+
+/* HADITH VERIFY CARD */
+.verify-card{margin-top:10px;padding:12px 15px;border-radius:8px;border:1px solid rgba(91,143,212,0.25);background:rgba(91,143,212,0.05);}
+.verify-grade{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.12em;margin-bottom:8px;}
+.grade-sahih{background:rgba(76,175,122,0.15);border:1px solid rgba(76,175,122,0.4);color:var(--green);}
+.grade-hasan{background:rgba(200,168,75,0.15);border:1px solid rgba(200,168,75,0.4);color:var(--gold);}
+.grade-daif{background:rgba(232,160,32,0.15);border:1px solid rgba(232,160,32,0.4);color:var(--amber);}
+.grade-mawdu{background:rgba(224,85,85,0.15);border:1px solid rgba(224,85,85,0.4);color:var(--red);}
+
+/* ACTION BUTTONS */
+.act-btn{background:none;border:1px solid var(--border);border-radius:4px;padding:3px 8px;color:var(--text-dim);font-size:0.65rem;cursor:pointer;transition:.18s;font-family:'Cinzel',serif;letter-spacing:0.08em;display:inline-flex;align-items:center;gap:4px;}
+.act-btn:hover{border-color:var(--gold-dim);color:var(--gold);}
+.act-btn.speaking{border-color:var(--green);color:var(--green);}
+.act-btn.fav{border-color:rgba(200,168,75,0.4);color:var(--gold-dim);}
+.act-btn.fav.saved{border-color:var(--gold);color:var(--gold);background:rgba(200,168,75,0.1);}
+.act-btn.wa{border-color:rgba(37,211,102,0.4);color:#25D366;}
+.act-btn.wa:hover{border-color:#25D366;background:rgba(37,211,102,0.08);}
+
+/* TOPICS MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:100;align-items:center;justify-content:center;padding:16px;}
+.modal-overlay.show{display:flex;}
+.modal{background:var(--panel2);border:1px solid var(--border-hi);border-radius:10px;width:100%;max-width:520px;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;}
+.modal-head{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.modal-title{font-family:'Cinzel Decorative',cursive;font-size:0.9rem;color:var(--gold);}
+.modal-close{background:none;border:none;color:var(--text-dim);font-size:1.1rem;cursor:pointer;padding:3px 7px;}
+.modal-body{overflow-y:auto;padding:14px;}
+.topic-cat{margin-bottom:14px;}
+.topic-cat-title{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:7px;padding-bottom:4px;border-bottom:1px solid rgba(232,160,32,0.2);}
+.topic-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;}
+.topic-btn{padding:8px 10px;border-radius:5px;border:1px solid var(--border);background:transparent;color:var(--text-dim);font-size:0.72rem;cursor:pointer;transition:.18s;text-align:left;line-height:1.3;}
+.topic-btn:hover{border-color:var(--gold-dim);color:var(--gold);background:rgba(200,168,75,0.05);}
+
+/* COUNTER ATTACK MODE */
+.counter-mode{background:rgba(224,85,85,0.06);border:1px solid rgba(224,85,85,0.2);border-radius:6px;padding:10px 13px;margin-bottom:7px;display:none;}
+.counter-mode.show{display:block;}
+.counter-label{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--red);margin-bottom:5px;}
+.counter-hint{font-size:0.72rem;color:var(--text-dim);}
+
+/* FAVORITES */
+.favs-section{display:none;}
+.favs-section.show{display:block;}
+.fav-item{padding:9px 11px;border-radius:5px;border:1px solid var(--border);background:var(--panel2);margin-bottom:5px;cursor:pointer;transition:.18s;position:relative;}
+.fav-item:hover{border-color:var(--gold-dim);}
+.fav-text{font-size:0.77rem;color:var(--text);line-height:1.5;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.fav-date{font-size:0.62rem;color:var(--text-dim);}
+.fav-del{position:absolute;right:7px;top:7px;background:none;border:none;color:var(--red);font-size:0.75rem;cursor:pointer;opacity:0.5;}
+.fav-del:hover{opacity:1;}
+
+/* TYPING */
+.typing-dots{display:flex;gap:6px;align-items:center;padding:3px 0;}
+.typing-dots span{width:7px;height:7px;border-radius:50%;background:var(--gold-dim);animation:bounce 1.3s ease-in-out infinite;}
+.typing-dots span:nth-child(2){animation-delay:.2s;}
+.typing-dots span:nth-child(3){animation-delay:.4s;}
+.typing-lbl{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.13em;color:var(--gold-dim);margin-left:9px;animation:pulse 1.5s ease-in-out infinite;}
+
+/* INPUT BAR */
+.input-bar{flex-shrink:0;padding:10px 14px;border-top:1px solid var(--border);background:rgba(7,9,13,0.97);}
+.voice-bar{display:none;align-items:center;gap:9px;padding:6px 11px;margin-bottom:6px;background:rgba(224,85,85,0.07);border:1px solid rgba(224,85,85,0.22);border-radius:6px;font-family:'Cinzel',serif;font-size:0.66rem;letter-spacing:0.13em;color:var(--red);}
+.voice-bar.show{display:flex;}
+.vwaves{display:flex;gap:3px;align-items:center;height:14px;flex-shrink:0;}
+.vwaves span{display:block;width:3px;background:var(--red);border-radius:2px;animation:vwave 0.8s ease-in-out infinite;}
+.vwaves span:nth-child(1){height:4px;}.vwaves span:nth-child(2){height:10px;animation-delay:.1s;}.vwaves span:nth-child(3){height:14px;animation-delay:.2s;}.vwaves span:nth-child(4){height:10px;animation-delay:.3s;}.vwaves span:nth-child(5){height:4px;animation-delay:.4s;}
+.vstop{margin-left:auto;background:none;border:1px solid var(--red);color:var(--red);border-radius:3px;padding:2px 8px;cursor:pointer;font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.1em;}
+.input-wrap{display:flex;gap:7px;align-items:flex-end;background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:7px 11px;transition:.22s;}
+.input-wrap:focus-within{border-color:var(--gold-dim);box-shadow:0 0 14px rgba(200,168,75,0.07);}
+#chatInput{flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:'Lato',sans-serif;font-size:0.88rem;line-height:1.6;resize:none;max-height:130px;min-height:22px;}
+#chatInput::placeholder{color:var(--text-dim);}
+.mic-btn{width:32px;height:32px;border-radius:6px;flex-shrink:0;background:var(--panel3);border:1px solid var(--border);color:var(--text-dim);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.95rem;transition:.2s;}
+.mic-btn:hover{border-color:var(--gold-dim);color:var(--gold);}
+.mic-btn.listening{background:rgba(224,85,85,0.15);border-color:var(--red);color:var(--red);animation:micpulse 1s ease-in-out infinite;}
+.send-btn{width:32px;height:32px;border-radius:6px;flex-shrink:0;background:linear-gradient(135deg,var(--gold-dim),var(--gold));border:none;color:var(--deep);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.88rem;transition:.2s;}
+.send-btn:hover{box-shadow:0 4px 14px rgba(200,168,75,0.38);transform:translateY(-1px);}
+.send-btn:disabled{opacity:.35;cursor:not-allowed;transform:none;}
+.input-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px;margin-top:4px;}
+.input-hint{font-size:0.58rem;color:var(--text-dim);font-family:'Cinzel',serif;letter-spacing:0.08em;}
+.voice-out-row{display:flex;align-items:center;gap:5px;}
+.voice-out-lbl{font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-dim);}
+.voice-lang{background:var(--panel2);border:1px solid var(--border);color:var(--text-dim);font-family:'Lato',sans-serif;font-size:0.69rem;padding:3px 5px;border-radius:3px;cursor:pointer;outline:none;}
+.voice-lang option{background:var(--panel2);}
+
+/* INSTALL + OFFLINE */
+.install-banner{display:none;position:fixed;bottom:85px;left:50%;transform:translateX(-50%);z-index:999;background:linear-gradient(135deg,var(--panel2),var(--panel3));border:1px solid var(--border-hi);border-radius:12px;padding:14px 16px;box-shadow:0 8px 32px rgba(0,0,0,0.7);max-width:320px;width:calc(100% - 28px);animation:fadeUp .4s ease forwards;}
+.install-banner.show{display:block;}
+.ib-title{font-family:'Cinzel Decorative',cursive;font-size:0.84rem;color:var(--gold);margin-bottom:4px;}
+.ib-sub{font-family:'Cinzel',serif;font-size:0.62rem;color:var(--text-dim);letter-spacing:0.1em;margin-bottom:11px;line-height:1.6;}
+.ib-btns{display:flex;gap:7px;}
+.ib-yes{flex:1;font-family:'Cinzel',serif;font-size:0.67rem;letter-spacing:0.12em;text-transform:uppercase;padding:8px;border-radius:5px;border:none;background:linear-gradient(135deg,var(--gold-dim),var(--gold));color:var(--deep);font-weight:700;cursor:pointer;}
+.ib-no{font-family:'Cinzel',serif;font-size:0.67rem;letter-spacing:0.12em;text-transform:uppercase;padding:8px 12px;border-radius:5px;border:1px solid var(--border);background:transparent;color:var(--text-dim);cursor:pointer;}
+.offline-bar{display:none;position:fixed;top:56px;left:0;right:0;z-index:30;padding:5px 14px;background:rgba(224,85,85,0.14);border-bottom:1px solid rgba(224,85,85,0.28);font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.14em;color:var(--red);text-align:center;}
+.offline-bar.show{display:block;}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:2px;}
+
+/* MOBILE */
+@media(max-width:760px){
+  :root{--sb:278px;}
+  .sidebar{position:fixed;left:0;top:56px;bottom:0;z-index:16;transform:translateX(-102%);}
+  .sidebar.open{transform:translateX(0);}
+  .overlay.show{display:block;}
+  .hamburger{display:flex;}
+  .msgs{padding:12px 9px;}
+  .mbody{max-width:96%;}
+  .qgrid{grid-template-columns:1fr 1fr;}
+  .topic-grid{grid-template-columns:1fr;}
+}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:15;}
+.overlay.show{display:block;}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="top-header">
+  <button class="hamburger" onclick="toggleSb()"><span></span><span></span><span></span></button>
+  <div class="logo-ar">راہِ حق</div>
+  <div class="logo-div"></div>
+  <div class="logo-en">
+    <div class="logo-title">RAH E HAQ</div>
+    <div class="logo-sub">Fiqah-e-Jafaria v2 ⚡ Free</div>
+  </div>
+  <div class="hdr-right">
+    <select class="lang-sel" id="langSel">
+      <option value="auto">🌐 Auto</option>
+      <option value="english">🇬🇧 English</option>
+      <option value="urdu">🇵🇰 Urdu</option>
+      <option value="roman_urdu">🇵🇰 Roman→Urdu</option>
+      <option value="arabic">🇸🇦 Arabic</option>
+      <option value="persian">🇮🇷 Persian</option>
+    </select>
+    <button class="icon-btn" onclick="toggleTheme()" title="Toggle Theme" id="themeBtn">🌙</button>
+    <button class="icon-btn" onclick="showTopics()" title="50 Topics">📚</button>
+    <button class="new-btn" onclick="newChat()">+ New</button>
+  </div>
+</header>
+
+<div class="overlay" id="overlay" onclick="toggleSb()"></div>
+<div class="offline-bar" id="offlineBar">⚠ No internet — AI unavailable</div>
+<div class="install-banner" id="installBanner">
+  <div class="ib-title">راہِ حق</div>
+  <div class="ib-sub">Install as app — opens fullscreen!</div>
+  <div class="ib-btns">
+    <button class="ib-yes" onclick="installApp()">📲 Install</button>
+    <button class="ib-no" onclick="dismissInstall()">Later</button>
+  </div>
+</div>
+
+<!-- TOPICS MODAL -->
+<div class="modal-overlay" id="topicsModal">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title">📚 50 Debate Topics</div>
+      <button class="modal-close" onclick="hideTopics()">✕</button>
+    </div>
+    <div class="modal-body" id="topicsBody"></div>
+  </div>
+</div>
+
+<div class="layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-head">📜 Saved Debates</div>
+    <div class="sb-list" id="sbList"></div>
+    <div class="sb-bottom">
+      <div class="ql">⚡ Hot Topics</div>
+      <div class="chips-col">
+        <button class="chip-s" onclick="qa('Prove Imamate of Ali (as) from Sunni hadith — Ghadir, Thaqalayn, Manzila. Full evidence.')">Imamate of Ali (ع)</button>
+        <button class="chip-s" onclick="qa('Wahabi say Mutah was abrogated. Full Jafari rebuttal with Sunni hadith.')">Nikah al-Mutah</button>
+        <button class="chip-s" onclick="qa('Why Shias prostrate on Turbah? Evidence from Quran and Sunni sources.')">Sajda on Turbah</button>
+        <button class="chip-s" onclick="qa('What happened at Karbala? Why Imam Hussain (as) is Sayyid al-Shuhada? Sunni sources.')">Karbala Evidence</button>
+        <button class="chip-s" onclick="qa('shia matam kyun karte hain? Quran aur hadees se daleel.')">شیعہ ماتم</button>
+      </div>
+      <div class="ql">⚠ Narrator Exposure</div>
+      <div class="chips-col">
+        <button class="chip-s r" onclick="qa('Expose Abu Huraira using Sunni rijal — Kanz al-Ummal, Tabaqat Ibn Sad. 5374 hadiths in 3 years?')">⚠ Abu Huraira</button>
+        <button class="chip-s r" onclick="qa('Expose Muawiya as hadith fabricator. Ibn Abi al-Hadid, Sharh Nahj al-Balagha evidence.')">⚠ Muawiya</button>
+        <button class="chip-s r" onclick="qa('Samura ibn Jundab bribed 400,000 dirhams by Muawiya. Document from Sunni sources.')">⚠ Samura ibn Jundab</button>
+        <button class="chip-s r" onclick="qa('Marwan ibn al-Hakam was exiled by Prophet ﷺ personally. Sunni source evidence.')">⚠ Marwan ibn al-Hakam</button>
+      </div>
+      <div class="ql">⭐ Favorites</div>
+      <div id="favsList" class="favs-section show"></div>
+    </div>
+    <div class="sb-actions">
+      <button class="sb-act-btn" onclick="exportChat()">⬇ Export Debate</button>
+      <button class="sb-act-btn" onclick="shareWhatsApp()">📱 Share to WhatsApp</button>
+    </div>
+  </aside>
+
+  <!-- CHAT -->
+  <div class="chat-area">
+    <div class="mode-bar">
+      <span class="ml">Mode:</span>
+      <button class="mode-btn active" data-mode="debate"  onclick="setMode(this,'debate')">⚔ Debate</button>
+      <button class="mode-btn"        data-mode="fiqh"    onclick="setMode(this,'fiqh')">📖 Fiqh</button>
+      <button class="mode-btn"        data-mode="aqeedah" onclick="setMode(this,'aqeedah')">🌙 Aqeedah</button>
+      <button class="mode-btn"        data-mode="rijal"   onclick="setMode(this,'rijal')">⚠ Rijal</button>
+      <button class="mode-btn"        data-mode="counter" onclick="setMode(this,'counter')">🔥 Counter-Attack</button>
+      <button class="mode-btn"        data-mode="verify"  onclick="setMode(this,'verify')">🔍 Verify Hadith</button>
+    </div>
+
+    <div class="msgs" id="msgs">
+      <div class="welcome" id="welcome">
+        <div class="wbism">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+        <div class="wtitle">راہِ حق v2 — Rah e Haq</div>
+        <div class="wsub">The most powerful Fiqah-e-Jafaria defense engine. Now with debate scoring, counter-attack mode, hadith verification & more.</div>
+        <div class="wdiv"><span>☽</span></div>
+        <div class="qgrid">
+          <div class="qcard" onclick="qa('Prove Imamate of Ali (as) from Sunni books — Ghadir, Thaqalayn, Manzila.')"><div class="qcard-icon">⚔</div><div class="qcard-title">Imamate of Ali (ع)</div><div class="qcard-desc">From Sunni books themselves</div></div>
+          <div class="qcard" onclick="setMode(document.querySelector('[data-mode=counter]'),'counter');document.getElementById('chatInput').focus()"><div class="qcard-icon">🔥</div><div class="qcard-title">Counter-Attack</div><div class="qcard-desc">Paste any Sunni objection</div></div>
+          <div class="qcard" onclick="setMode(document.querySelector('[data-mode=verify]'),'verify');document.getElementById('chatInput').focus()"><div class="qcard-icon">🔍</div><div class="qcard-title">Verify a Hadith</div><div class="qcard-desc">Check chain & authenticity</div></div>
+          <div class="qcard" onclick="qa('Expose Abu Huraira, Muawiya, Samura, Marwan using Sunni rijal books.')"><div class="qcard-icon">⚠</div><div class="qcard-title">Narrator Exposure</div><div class="qcard-desc">Rijal from Sunni sources</div></div>
+          <div class="qcard" onclick="qa('shia matam kyun karte hain? Quran aur hadees se daleel do.')"><div class="qcard-icon">🌙</div><div class="qcard-title">Matam — Roman Urdu</div><div class="qcard-desc">Urdu mein jawab</div></div>
+          <div class="qcard" onclick="showTopics()"><div class="qcard-icon">📚</div><div class="qcard-title">50 Topics</div><div class="qcard-desc">Full debate topic library</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="input-bar">
+      <div class="counter-mode" id="counterMode">
+        <div class="counter-label">🔥 Counter-Attack Mode Active</div>
+        <div class="counter-hint">Paste the exact objection or argument raised against you — AI will find 3 fatal weaknesses in it.</div>
+      </div>
+      <div class="voice-bar" id="voiceBar">
+        <div class="vwaves"><span></span><span></span><span></span><span></span><span></span></div>
+        <span id="voiceStatus">Listening...</span>
+        <button class="vstop" onclick="stopListening()">STOP</button>
+      </div>
+      <div class="input-wrap">
+        <textarea id="chatInput" placeholder="Ask in any language — English, Urdu, Roman Urdu, Arabic..." rows="1"></textarea>
+        <button class="mic-btn" id="micBtn" onclick="toggleVoice()">🎙</button>
+        <button class="send-btn" id="sendBtn" onclick="send()">➤</button>
+      </div>
+      <div class="input-footer">
+        <div class="input-hint">Enter=Send · Shift+Enter=New line · 🎙=Voice · Auto-saved</div>
+        <div class="voice-out-row">
+          <span class="voice-out-lbl">AI Voice:</span>
+          <select class="voice-lang" id="voiceLang">
+            <option value="off">🔇 Off</option>
+            <option value="en-US">🇬🇧 English</option>
+            <option value="ur-PK">🇵🇰 Urdu</option>
+            <option value="ar-SA">🇸🇦 Arabic</option>
+            <option value="fa-IR">🇮🇷 Persian</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+// ══ STATE ══
+let mode     = 'debate';
+let sessions = {};
+let activeId = null;
+let busy     = false;
+let favs     = [];
+let isLight  = false;
+
+// ══ STORAGE ══
+function save(){ try{ localStorage.setItem('rahv2_sessions', JSON.stringify(sessions)); }catch(e){} }
+function load(){
+  try{
+    const d=localStorage.getItem('rahv2_sessions'); if(d) sessions=JSON.parse(d);
+    const f=localStorage.getItem('rahv2_favs'); if(f) favs=JSON.parse(f);
+    const t=localStorage.getItem('rahv2_theme'); if(t==='light'){ isLight=true; document.body.classList.add('light'); document.getElementById('themeBtn').textContent='☀'; }
+  }catch(e){ sessions={}; favs=[]; }
+}
+function saveFavs(){ try{ localStorage.setItem('rahv2_favs', JSON.stringify(favs)); }catch(e){} }
+
+// ══ THEME ══
+function toggleTheme(){
+  isLight=!isLight;
+  document.body.classList.toggle('light',isLight);
+  document.getElementById('themeBtn').textContent=isLight?'☀':'🌙';
+  localStorage.setItem('rahv2_theme',isLight?'light':'dark');
+}
+
+// ══ SESSIONS ══
+function newChat(){
+  const id='s_'+Date.now();
+  sessions[id]={ title:'New Debate', msgs:[], date:new Date().toLocaleDateString(), mode, score:null };
+  activeId=id; save(); renderSb(); renderMsgs();
+  document.getElementById('chatInput').focus();
+  closeSbMobile();
+}
+
+function loadSession(id){
+  if(!sessions[id]) return;
+  activeId=id; mode=sessions[id].mode||'debate';
+  document.querySelectorAll('.mode-btn').forEach(b=>b.classList.toggle('active',b.getAttribute('data-mode')===mode));
+  updateCounterMode();
+  renderMsgs(); renderSb(); closeSbMobile();
+}
+
+function deleteSess(id,e){
+  e.stopPropagation();
+  if(!confirm('Delete this debate?')) return;
+  delete sessions[id];
+  if(activeId===id){ activeId=null; }
+  save(); renderSb(); renderMsgs();
+}
+
+function renderSb(){
+  const el=document.getElementById('sbList');
+  const ids=Object.keys(sessions).sort((a,b)=>b.localeCompare(a));
+  if(!ids.length){ el.innerHTML='<div class="sb-empty">No saved debates yet.<br>Start a new debate!</div>'; return; }
+  el.innerHTML=ids.map(id=>{
+    const s=sessions[id]; const act=id===activeId?'active':'';
+    const qc=s.msgs.filter(m=>m.role==='user').length;
+    const scoreHtml=s.score?`<span class="sitem-score">⭐ ${s.score}/10</span>`:'';
+    return `<div class="sitem ${act}" onclick="loadSession('${id}')">
+      <div class="sitem-title">${esc(s.title)}</div>
+      <div class="sitem-meta">${s.date} · ${qc}q ${scoreHtml}</div>
+      <button class="sitem-del" onclick="deleteSess('${id}',event)">✕</button>
+    </div>`;
+  }).join('');
+  renderFavs();
+}
+
+// ══ FAVORITES ══
+function saveFav(content){
+  const fav={ id:'f_'+Date.now(), text:content.substring(0,300), date:new Date().toLocaleDateString() };
+  favs.unshift(fav);
+  if(favs.length>20) favs=favs.slice(0,20);
+  saveFavs(); renderFavs();
+  return fav.id;
+}
+
+function deleteFav(id,e){
+  e.stopPropagation();
+  favs=favs.filter(f=>f.id!==id);
+  saveFavs(); renderFavs();
+}
+
+function renderFavs(){
+  const el=document.getElementById('favsList');
+  if(!favs.length){ el.innerHTML='<div style="font-size:0.68rem;color:var(--text-dim);padding:4px 2px;font-family:Cinzel,serif;">No favorites yet. Tap ⭐ on any response.</div>'; return; }
+  el.innerHTML=favs.map(f=>`
+    <div class="fav-item" onclick="qa('${f.text.replace(/'/g,"\\'").substring(0,100)}')">
+      <div class="fav-text">${esc(f.text)}</div>
+      <div class="fav-date">${f.date}</div>
+      <button class="fav-del" onclick="deleteFav('${f.id}',event)">✕</button>
+    </div>`).join('');
+}
+
+// ══ MESSAGES ══
+function renderMsgs(){
+  const wrap=document.getElementById('msgs');
+  const wl=document.getElementById('welcome');
+  wrap.querySelectorAll('.msg,.tmsg').forEach(e=>e.remove());
+  if(!activeId||!sessions[activeId]||!sessions[activeId].msgs.length){
+    wl.style.display='flex'; return;
+  }
+  wl.style.display='none';
+  sessions[activeId].msgs.forEach(m=>appendDOM(m.role,m.content,false,m.score,m.favId));
+  scrollBot();
+}
+
+function appendDOM(role, content, anim=true, scoreData=null, favId=null){
+  const wrap=document.getElementById('msgs');
+  document.getElementById('welcome').style.display='none';
+  const d=document.createElement('div');
+  d.className='msg '+role;
+  if(!anim) d.style.animation='none';
+  const t=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  const av=role==='user'?'👤':'☪';
+  const body=role==='user'?`<p style="margin:0">${esc(content)}</p>`:formatResp(content);
+
+  // Build score card HTML if present
+  let scoreHtml='';
+  if(scoreData && role==='ai'){
+    scoreHtml=buildScoreCard(scoreData);
+  }
+
+  // Build action buttons for AI messages
+  let actHtml='';
+  if(role==='ai'){
+    const isFaved=favId!=null;
+    actHtml=`<div class="msg-actions">
+      <button class="act-btn" onclick="speakText(this)" data-text="${esc(content)}">🔊 Listen</button>
+      <button class="act-btn fav ${isFaved?'saved':''}" onclick="toggleFav(this,'${esc(content).substring(0,200)}')" data-favid="${favId||''}">⭐ ${isFaved?'Saved':'Save'}</button>
+      <button class="act-btn wa" onclick="shareMsg('${esc(content.substring(0,500))}')">📱 Share</button>
+    </div>`;
+  }
+
+  d.innerHTML=`<div class="mavatar">${av}</div>
+    <div class="mbody">
+      <div class="mbubble">${body}</div>
+      ${scoreHtml}
+      ${actHtml}
+      <div class="mtime">${role==='user'?'You':'Rah e Haq'} · ${t}</div>
+    </div>`;
+  wrap.appendChild(d);
+  if(anim) scrollBot();
+
+  // Auto-speak
+  if(role==='ai'&&anim){
+    const vl=document.getElementById('voiceLang');
+    if(vl&&vl.value!=='off'&&window.speechSynthesis){
+      const sb=d.querySelector('.act-btn');
+      if(sb) setTimeout(()=>speakText(sb),400);
+    }
+  }
+}
+
+function buildScoreCard(s){
+  const bars=[
+    {label:'Quranic Proof',val:s.quran,color:'#4CAF7A'},
+    {label:'Sunni Evidence',val:s.sunni,color:'#5B8FD4'},
+    {label:'Rijal Analysis',val:s.rijal,color:'#E8A020'},
+    {label:'Logic',val:s.logic,color:'#C8A84B'},
+  ];
+  const barsHtml=bars.map(b=>`
+    <div class="score-row">
+      <div class="score-label">${b.label}</div>
+      <div class="score-bar-wrap"><div class="score-bar-fill" style="width:${b.val*10}%;background:${b.color}"></div></div>
+      <div class="score-num">${b.val}</div>
+    </div>`).join('');
+  const total=s.total;
+  const verdict=total>=9?'Decisive Victory ✅':total>=7?'Strong Victory ✅':total>=5?'Solid Position 🟡':'Needs Strengthening 🔴';
+  return `<div class="score-card">
+    <div class="score-header">⭐ Debate Score — Jafari Position</div>
+    <div class="score-bars">${barsHtml}</div>
+    <div class="score-total">${total}/10</div>
+    <div class="score-verdict">${verdict}</div>
+  </div>`;
+}
+
+function toggleFav(btn, content){
+  if(btn.classList.contains('saved')){
+    const fid=btn.getAttribute('data-favid');
+    if(fid){ favs=favs.filter(f=>f.id!==fid); saveFavs(); renderFavs(); }
+    btn.classList.remove('saved'); btn.textContent='⭐ Save';
+    btn.setAttribute('data-favid','');
+  } else {
+    const fid=saveFav(content);
+    btn.classList.add('saved'); btn.innerHTML='⭐ Saved';
+    btn.setAttribute('data-favid',fid);
+  }
+}
+
+function showTyping(){
+  const wrap=document.getElementById('msgs');
+  document.getElementById('welcome').style.display='none';
+  const d=document.createElement('div');
+  d.className='msg ai tmsg'; d.id='tmsg';
+  d.innerHTML=`<div class="mavatar">☪</div>
+    <div class="mbody"><div class="mbubble">
+      <div class="typing-dots"><span></span><span></span><span></span>
+      <span class="typing-lbl">Consulting Bukhari, Al-Kafi, Rijal sources...</span>
+      </div></div></div>`;
+  wrap.appendChild(d); scrollBot();
+}
+function hideTyping(){ const e=document.getElementById('tmsg'); if(e) e.remove(); }
+function scrollBot(){ const w=document.getElementById('msgs'); setTimeout(()=>w.scrollTop=w.scrollHeight,60); }
+
+// ══ SEND ══
+async function send(){
+  const inp=document.getElementById('chatInput');
+  const txt=inp.value.trim();
+  if(!txt||busy) return;
+  if(!activeId) newChat();
+  const sess=sessions[activeId];
+  if(!sess.msgs.length) sess.title=txt.length>46?txt.substring(0,46)+'…':txt;
+  sess.msgs.push({role:'user',content:txt});
+  appendDOM('user',txt);
+  inp.value=''; resize(inp); save(); renderSb();
+  await callAPI(sess,false);
+}
+
+async function continueResponse(){
+  if(!activeId||busy) return;
+  const cb=document.getElementById('continueBtn'); if(cb) cb.remove();
+  const sess=sessions[activeId];
+  sess.msgs.push({role:'user',content:'__CONTINUE__'});
+  await callAPI(sess,true);
+}
+
+async function callAPI(sess, isContinue){
+  busy=true;
+  document.getElementById('sendBtn').disabled=true;
+  showTyping();
+  try{
+    const res=await fetch('https://api.groq.com/openai/v1/chat/completions',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'Authorization':'Bearer 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'
+      },
+      body:JSON.stringify({
+        model:'llama-3.3-70b-versatile',
+        max_tokens:4000,
+        messages:[
+          {role:'system',content:buildSys()},
+          ...buildHistory(sess.msgs)
+        ]
+      })
+    });
+    const data=await res.json();
+    const reply=(data.choices||[]).map(i=>i.message?.content||'').join('\n')||'No response received.';
+    const cut=data.choices?.[0]?.finish_reason==='length';
+    hideTyping();
+
+    // Parse score from response if present
+    let scoreData=null;
+    let cleanReply=reply;
+    const scoreMatch=reply.match(/\[\[SCORE:(.*?)\]\]/s);
+    if(scoreMatch){
+      try{ scoreData=JSON.parse(scoreMatch[1]); }catch(e){}
+      cleanReply=reply.replace(/\[\[SCORE:.*?\]\]/s,'').trim();
+    }
+
+    if(isContinue){
+      const lastIdx=[...sess.msgs].map(m=>m.role).lastIndexOf('assistant');
+      if(lastIdx!==-1){
+        sess.msgs[lastIdx].content+='\n'+cleanReply;
+        const contIdx=sess.msgs.findLastIndex(m=>m.content==='__CONTINUE__');
+        if(contIdx!==-1) sess.msgs.splice(contIdx,1);
+        const allBubbles=document.querySelectorAll('.msg.ai');
+        const last=allBubbles[allBubbles.length-1];
+        if(last) last.querySelector('.mbubble').innerHTML=formatResp(sess.msgs[lastIdx].content);
+      }
+    } else {
+      const msgObj={role:'assistant',content:cleanReply,score:scoreData};
+      sess.msgs.push(msgObj);
+      // Update session score
+      if(scoreData) sess.score=scoreData.total;
+      appendDOM('ai',cleanReply,true,scoreData,null);
+    }
+    if(cut) showContinueBtn();
+    save(); renderSb();
+  }catch(err){
+    hideTyping();
+    const em='⚠ Connection error: '+err.message+'\n\nMake sure you have internet connection.';
+    sess.msgs.push({role:'assistant',content:em});
+    appendDOM('ai',em); save();
+  }
+  busy=false;
+  document.getElementById('sendBtn').disabled=false;
+  document.getElementById('chatInput').focus();
+}
+
+function buildHistory(msgs){
+  return msgs.filter(m=>m.content!=='__CONTINUE__')
+    .map(m=>({role:m.role==='assistant'?'assistant':'user',content:m.content}));
+}
+
+function showContinueBtn(){
+  const existing=document.getElementById('continueBtn'); if(existing) existing.remove();
+  const wrap=document.getElementById('msgs');
+  const d=document.createElement('div'); d.id='continueBtn';
+  d.style.cssText='display:flex;justify-content:center;padding:6px 0;';
+  d.innerHTML=`<button onclick="continueResponse()" style="font-family:Cinzel,serif;font-size:0.67rem;letter-spacing:0.15em;text-transform:uppercase;padding:8px 22px;border-radius:4px;border:1px solid var(--amber);background:rgba(232,160,32,0.09);color:var(--amber);cursor:pointer;">⬇ Response cut off — Tap to continue</button>`;
+  wrap.appendChild(d); scrollBot();
+}
+
+function qa(txt){
+  if(!activeId) newChat();
+  document.getElementById('chatInput').value=txt;
+  send();
+}
+
+// ══ SYSTEM PROMPT ══
+function buildSys(){
+  const lang=document.getElementById('langSel').value;
+  let li='';
+  if(lang==='auto'){
+    li=`LANGUAGE: Detect user language and respond fully in that language.
+ROMAN URDU: If user writes kyun/kya/hain/karte/matam/namaz/imamat/shia/sunni/hadees/daleel — respond in proper Urdu script (نستعلیق).`;
+  } else if(lang==='roman_urdu'){
+    li='Respond entirely in proper Urdu script (نستعلیق).';
+  } else {
+    li=`Respond fully in ${lang} with appropriate Islamic scholarly terminology.`;
+  }
+
+  const modeInstructions={
+    debate:`You are in DEBATE MODE. Comprehensively defend Fiqah-e-Jafaria against any objection. Always find Sunni sources first. End every response with a score block.`,
+    fiqh:`You are in FIQH MODE. Answer jurisprudence questions from Jafari fiqh with citations from Al-Kafi, Tahdhib, fatwas of Sistani/Khomeini. End with score block.`,
+    aqeedah:`You are in AQEEDAH MODE. Explain and defend Jafari theological positions on Imamate, Ismat, Raj'a, Bada etc. End with score block.`,
+    rijal:`You are in RIJAL MODE. Deeply analyze narrator chains. Expose weak narrators using Sunni rijal books. End with score block.`,
+    counter:`You are in COUNTER-ATTACK MODE. The user will paste an argument made against Shia Islam. Your job:
+1. Find the 3 FATAL WEAKNESSES in that argument
+2. Show where their own books contradict it
+3. Expose if any narrator in their evidence is weak
+4. Deliver a devastating counter-response
+Be sharp, precise, and devastating. End with score block.`,
+    verify:`You are in HADITH VERIFICATION MODE. When user gives a hadith:
+1. Identify which book it's from
+2. Analyze the narrator chain (isnad)
+3. Grade it: Sahih / Hasan / Daif / Mawdu
+4. Note if any narrator is weak from Sunni rijal books
+5. Explain if this hadith supports or contradicts Jafari position
+End with score block.`
+  };
+
+  return `You are RAH E HAQ — the most advanced Fiqah-e-Jafaria scholarly defense AI. Master of:
+
+JAFARI: Afzaliyat-e-Ali (Allama Yasin Qadri), Bihar al-Anwar (Majlisi), Al-Kafi (Kulayni), Tahdhib (Tusi), Al-Irshad (Mufid), Al-Mizan (Tabatabai), Wasail al-Shia, Nahj al-Balagha. Fatwas: Sistani, Khomeini, Khamene'i.
+
+SUNNI HADITH: Sahih Bukhari, Sahih Muslim, Sunan Abu Dawood, Tirmidhi, Ibn Majah, Musnad Ahmad, Nasa'i, Muwatta Malik.
+
+RIJAL: Mizan al-I'tidal (Dhahabi), Tahdhib al-Kamal (Mizzi), Lisan al-Mizan (Ibn Hajar), al-Jarh wa al-Ta'dil (Ibn Abi Hatim), Siyar A'lam al-Nubala (Dhahabi), Sharh Nahj al-Balagha (Ibn Abi al-Hadid).
+
+GHADIR KHUMM DATABASE: Narrated by 110 companions, confirmed in Musnad Ahmad, Sahih Muslim (partial), Tirmidhi, Ibn Majah, Nasa'i, Mustadrak Hakim (who graded it Sahih). Over 360 Sunni books document it.
+
+YAZID VERDICT DATABASE: Imam Ahmad ibn Hanbal refused to pray for Yazid. Ibn Kathir documented his fasiq nature. Ibn al-Jawzi, Ibn Khaldun, al-Nawawi — all major Sunni scholars condemned him. Yazid had no legitimate Islamic authority.
+
+${li}
+
+CURRENT MODE: ${modeInstructions[mode]||modeInstructions.debate}
+
+RESPONSE STRUCTURE:
+
+## 📗 Evidence from Sunni Sources
+Their own books supporting Jafari position. Hadith al-Thaqalayn (Sahih Muslim), Hadith al-Ghadir (Musnad Ahmad — 110 companions), Hadith al-Manzila (Bukhari & Muslim), Hadith al-Kisa, Ayat al-Tatheer context.
+
+## ⚠️ Narrator Credibility — علم الرجال
+MANDATORY. Expose weak narrators using SUNNI rijal books:
+• ABU HURAIRA: 3 years with Prophet, 5374+ hadiths — more than Abu Bakr, Umar, Ali, Aisha combined. Umar BEAT him (Kanz al-Ummal). Ali called him greatest liar. Grew rich under Muawiya.
+• MUAWIYA: Ordered Ali cursed from pulpits 20 years. Paid narrators to fabricate (Ibn Abi al-Hadid, Sharh Nahj Vol.4). Imam Ahmad refused to narrate from him.
+• SAMURA IBN JUNDAB: Took 400,000 dirhams from Muawiya to fabricate hadiths (Ibn Abi al-Hadid). Sold his deen for money.
+• MARWAN IBN AL-HAKAM: Prophet ﷺ personally exiled him (Tarikh al-Tabari, al-Isabah by Ibn Hajar).
+• AMR IBN AL-AAS: Fought Ali at Siffin. Enemy of Ahlul Bayt. Narrations are political weapons.
+• WALID IBN UQBA: Quran 49:6 calls him a fasiq explicitly — "O believers, if a fasiq brings news, verify it." Sunni tafseer confirms this about Walid.
+• MUGHIRA IBN SHUBA: Accused of zina by Umar's witnesses. Muawiya's agent.
+• IKRIMAH: Ibn Umar refused to narrate from him. Sa'id ibn al-Musayyab called him liar. Kharijite beliefs.
+• BUSR IBN ARTAT: Massacred Ali's supporters including children. Zero credibility.
+
+## ☪️ The Jafari Position
+Confidently state Jafari position grounded in Quran and Ahlul Bayt narrations.
+
+## 📚 Evidence from Jafari Sources
+Specific citations — book, author, volume. Uncertain: "reference to be verified."
+
+## 🔍 Dismantling the Objection
+① Their own books contradicting them ② Weak narrators in their chains ③ Logical inconsistencies ④ Quranic evidence
+
+## ✅ Conclusion — الخلاصة
+Powerful, decisive. Never neutral. Jafari position always wins.
+
+SCORE BLOCK — MANDATORY AT END OF EVERY RESPONSE:
+After your conclusion, add exactly this on a new line:
+[[SCORE:{"quran":X,"sunni":X,"rijal":X,"logic":X,"total":X}]]
+Where X is 1-10. Total should be average rounded. Be honest but favor strength of Jafari evidence.
+
+RULES:
+— Never fabricate. Uncertain: "reference to be verified"
+— Scholarly dignity always
+— Maintain conversation context
+— Every conclusion firmly favors Fiqah-e-Jafaria`;
+}
+
+// ══ FORMATTER ══
+function formatResp(txt){
+  let h=txt;
+  h=h.replace(/\[\[SCORE:.*?\]\]/gs,''); // Remove score block from display
+  h=h.replace(/^##\s*(📗[^\n]*)$/gm,'<h2 class="g">$1</h2>');
+  h=h.replace(/^##\s*(⚠️[^\n]*)$/gm,'<h2 class="a">$1</h2>');
+  h=h.replace(/^##\s*(🔍[^\n]*)$/gm,'<h2 class="b">$1</h2>');
+  h=h.replace(/^##\s*(✅[^\n]*)$/gm,'<h2 class="g">$1</h2>');
+  h=h.replace(/^##\s*(🔥[^\n]*)$/gm,'<h2 class="r">$1</h2>');
+  h=h.replace(/^##\s*([^\n]*)$/gm,'<h2>$1</h2>');
+  h=h.replace(/^###\s*([^\n]*)$/gm,'<h3>$1</h3>');
+  h=h.replace(/\*\*([^*\n]+)\*\*/g,'<strong>$1</strong>');
+  h=h.replace(/\*([^*\n]+)\*/g,'<em>$1</em>');
+  h=h.replace(/^>\s*(.+)$/gm,'<div class="cblock">$1</div>');
+  h=h.replace(/^[•\-]\s+(.+)$/gm,'<p style="padding-left:13px;margin-bottom:5px">◆ $1</p>');
+  h=h.replace(/^(\d+)[.)]\s+(.+)$/gm,'<p style="padding-left:13px;margin-bottom:5px"><strong>$1.</strong> $2</p>');
+  h=h.replace(/^[①②③④⑤⑥⑦]\s*(.+)$/gm,'<p style="padding-left:13px;margin-bottom:5px">$1</p>');
+  h=h.replace(/(<h2[^>]*>✅[^<]*<\/h2>)([\s\S]*?)(?=<h2|$)/g,(_,hd,body)=>hd+'<div class="conc">'+body.trim()+'</div>');
+  h=h.split(/\n\n+/).map(b=>{
+    const t=b.trim();
+    if(!t) return '';
+    if(/^<(h[23]|div|p style)/.test(t)) return t;
+    return '<p>'+t.replace(/\n/g,'<br>')+'</p>';
+  }).join('\n');
+  return h;
+}
+
+// ══ MODE ══
+function setMode(btn,m){
+  document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active'); mode=m;
+  if(activeId&&sessions[activeId]){ sessions[activeId].mode=m; save(); }
+  updateCounterMode();
+}
+
+function updateCounterMode(){
+  document.getElementById('counterMode').classList.toggle('show', mode==='counter');
+  const inp=document.getElementById('chatInput');
+  const hints={
+    debate:'Ask any question or raise any objection...',
+    fiqh:'Ask a Fiqh ruling question...',
+    aqeedah:'Ask about Jafari theology and beliefs...',
+    rijal:'Name a narrator or paste a hadith chain to analyze...',
+    counter:'Paste the exact Sunni/Wahabi argument to destroy...',
+    verify:'Paste the hadith you want to verify...'
+  };
+  inp.placeholder=hints[m]||hints.debate;
+}
+
+// ══ TOPICS MODAL ══
+const TOPICS={
+  'Imamate & Wilayah':['Prove 12 Imams from Quran','Hadith al-Thaqalayn — full analysis','Ghadir Khumm — 110 companions evidence','Ayat al-Wilayah 5:55 tafseer','Hadith al-Manzila in Bukhari & Muslim','Imams being Masoom — Quranic proof','Bay\'ah of Ali (as) — what really happened','Hadith al-Kisa and Ayat al-Tatheer'],
+  'Karbala & Yazid':['Why Imam Hussain (as) is Sayyid al-Shuhada','Yazid — Sunni scholars verdict','Was Yazid\'s caliphate legitimate?','Mukhtar al-Thaqafi — justified revolt?','Matam — evidence from Quran and Sunni hadith','Azadari — historical roots'],
+  'Fiqh Differences':['Why Shias pray with hands open','Hayya ala Khayril Amal in Adhan','Combining prayers — Jam al-Salatayn','Sajda on Turbah — full evidence','Nikah al-Mutah — abrogated or not?','Wuzu differences — Jafari vs Sunni','Taqlid of Marja — why obligatory'],
+  'Narrator Exposure':['Abu Huraira — 5374 hadiths in 3 years','Muawiya ordered cursing of Ali 20 years','Samura ibn Jundab sold hadiths for 400k','Marwan ibn al-Hakam exiled by Prophet','Walid ibn Uqba — Quran calls him fasiq','Amr ibn al-Aas at Siffin','Ikrimah — Sunni scholars called him liar','Busr ibn Artat massacred children'],
+  'Sunni Sources Prove Jafari':['What Sahih Muslim says about Ali (as)','Musnad Ahmad on Ghadir Khumm','What Tirmidhi narrates about Ahlul Bayt','Dhahabi praises for Imam Ali (as)','Sunni scholars who condemned Muawiya','Ibn Hajar on narrator weaknesses'],
+  'Aqeedah':['Bada — Jafari position explained','Raj\'a — return before Qiyamah','Tawassul — shirk or sunnah?','Intercession of Ahlul Bayt','Muta\'ah al-Hajj — Sunni evidence','Tabarru and Tawalla']
+};
+
+function showTopics(){
+  const body=document.getElementById('topicsBody');
+  body.innerHTML=Object.entries(TOPICS).map(([cat,topics])=>`
+    <div class="topic-cat">
+      <div class="topic-cat-title">${cat}</div>
+      <div class="topic-grid">${topics.map(t=>`<button class="topic-btn" onclick="selectTopic('${t.replace(/'/g,"\\'")}')">${ t}</button>`).join('')}</div>
+    </div>`).join('');
+  document.getElementById('topicsModal').classList.add('show');
+}
+
+function selectTopic(t){
+  hideTopics();
+  if(!activeId) newChat();
+  document.getElementById('chatInput').value=t;
+  send();
+}
+
+function hideTopics(){ document.getElementById('topicsModal').classList.remove('show'); }
+
+// ══ SHARE ══
+function shareMsg(content){
+  const clean=content.replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'");
+  const text='*راہِ حق — Rah e Haq*\n\n'+clean+'\n\n_Fiqah-e-Jafaria Debate Engine_';
+  const url='https://wa.me/?text='+encodeURIComponent(text);
+  window.open(url,'_blank');
+}
+
+function shareWhatsApp(){
+  if(!activeId||!sessions[activeId]) return;
+  const s=sessions[activeId];
+  let txt='*راہِ حق — '+s.title+'*\n\n';
+  const last=s.msgs.filter(m=>m.role==='assistant').pop();
+  if(last) txt+=last.content.replace(/[#*]/g,'').substring(0,1000)+'...\n\n';
+  txt+='_Fiqah-e-Jafaria Debate Engine_';
+  window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
+}
+
+function exportChat(){
+  if(!activeId||!sessions[activeId]) return;
+  const s=sessions[activeId];
+  let txt=`RAH E HAQ — راہِ حق\n${s.title}\nDate: ${s.date}\n${'═'.repeat(60)}\n\n`;
+  s.msgs.forEach(m=>{ txt+=m.role==='user'?`YOU:\n${m.content}\n\n`:`RAH E HAQ:\n${m.content}\n\n${'─'.repeat(50)}\n\n`; });
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([txt],{type:'text/plain;charset=utf-8'}));
+  a.download='RahEHaq_'+s.title.replace(/[^a-z0-9]/gi,'_').substring(0,30)+'.txt';
+  a.click();
+}
+
+// ══ VOICE INPUT ══
+let recognition=null, isListening=false;
+function toggleVoice(){ isListening?stopListening():startListening(); }
+
+function startListening(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){ alert('Voice input requires Chrome browser.'); return; }
+  if(window.speechSynthesis) try{window.speechSynthesis.cancel();}catch(e){}
+  recognition=new SR();
+  const lm={auto:'',english:'en-US',urdu:'ur-PK',roman_urdu:'ur-PK',arabic:'ar-SA',persian:'fa-IR'};
+  recognition.lang=lm[document.getElementById('langSel').value]||'';
+  recognition.continuous=false; recognition.interimResults=true; recognition.maxAlternatives=1;
+  recognition.onstart=()=>{ isListening=true; document.getElementById('micBtn').classList.add('listening'); document.getElementById('micBtn').textContent='⏹'; document.getElementById('voiceBar').classList.add('show'); document.getElementById('voiceStatus').textContent='Listening...'; };
+  recognition.onresult=(e)=>{ let f='',i=''; for(let x=e.resultIndex;x<e.results.length;x++){ const t=e.results[x][0].transcript; e.results[x].isFinal?(f+=t):(i+=t); } const c=f||i; const inp=document.getElementById('chatInput'); inp.value=c; resize(inp); document.getElementById('voiceStatus').textContent=c?'"'+c.substring(0,45)+'..."':'Listening...'; if(f&&f.trim()){ stopListening(); setTimeout(()=>send(),400); } };
+  recognition.onerror=(e)=>{ stopListening(); const msgs={'not-allowed':'Allow mic in Chrome settings.','no-speech':'No speech. Try again.','network':'Network error.','audio-capture':'No mic found.'}; document.getElementById('voiceStatus').textContent=msgs[e.error]||'Error: '+e.error; setTimeout(()=>document.getElementById('voiceBar').classList.remove('show'),2500); };
+  recognition.onend=()=>{ if(isListening) stopListening(); };
+  try{ recognition.start(); }catch(e){ stopListening(); }
+}
+
+function stopListening(){
+  if(recognition){ try{recognition.stop();}catch(e){} recognition=null; }
+  isListening=false;
+  const mb=document.getElementById('micBtn'); if(mb){ mb.classList.remove('listening'); mb.textContent='🎙'; }
+  const vb=document.getElementById('voiceBar'); if(vb) vb.classList.remove('show');
+}
+
+// ══ VOICE OUTPUT ══
+let curSpeakBtn=null;
+function speakText(btn){
+  if(!window.speechSynthesis){ if(btn) btn.style.display='none'; return; }
+  if(btn&&btn.classList.contains('speaking')){ try{window.speechSynthesis.cancel();}catch(e){} btn.classList.remove('speaking'); btn.innerHTML='🔊 Listen'; curSpeakBtn=null; return; }
+  try{window.speechSynthesis.cancel();}catch(e){}
+  if(curSpeakBtn){ curSpeakBtn.classList.remove('speaking'); curSpeakBtn.innerHTML='🔊 Listen'; }
+  const vl=document.getElementById('voiceLang'); const voiceLang=vl?vl.value:'off'; if(voiceLang==='off') return;
+  let rawText=btn?(btn.getAttribute('data-text')||''):'';
+  rawText=rawText.replace(/<[^>]+>/g,' ').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/\*{1,2}/g,'').replace(/#{1,3}/g,'').replace(/\s+/g,' ').trim();
+  if(!rawText) return;
+  const utt=new SpeechSynthesisUtterance(rawText); utt.lang=voiceLang; utt.rate=0.87; utt.pitch=1; utt.volume=1;
+  try{ const vs=window.speechSynthesis.getVoices()||[]; const m=vs.find(v=>v.lang&&v.lang.startsWith(voiceLang.split('-')[0])); if(m) utt.voice=m; }catch(e){}
+  utt.onend=()=>{ if(btn){ btn.classList.remove('speaking'); btn.innerHTML='🔊 Listen'; } curSpeakBtn=null; };
+  utt.onerror=()=>{ if(btn){ btn.classList.remove('speaking'); btn.innerHTML='🔊 Listen'; } curSpeakBtn=null; };
+  if(btn){ btn.classList.add('speaking'); btn.innerHTML='⏹ Stop'; curSpeakBtn=btn; }
+  try{ window.speechSynthesis.speak(utt); }catch(e){ if(btn){ btn.classList.remove('speaking'); btn.innerHTML='🔊 Listen'; } curSpeakBtn=null; }
+}
+if(window.speechSynthesis){ try{ window.speechSynthesis.onvoiceschanged=()=>window.speechSynthesis.getVoices(); }catch(e){} }
+
+// ══ UI HELPERS ══
+function toggleSb(){ document.getElementById('sidebar').classList.toggle('open'); document.getElementById('overlay').classList.toggle('show'); }
+function closeSbMobile(){ if(window.innerWidth<=760){ document.getElementById('sidebar').classList.remove('open'); document.getElementById('overlay').classList.remove('show'); } }
+function resize(el){ el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,130)+'px'; }
+function esc(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+function updateOnlineStatus(){ const b=document.getElementById('offlineBar'); if(b) b.classList.toggle('show',!navigator.onLine); }
+window.addEventListener('online',updateOnlineStatus); window.addEventListener('offline',updateOnlineStatus);
+
+// ══ PWA ══
+function generateIcon(size){
+  const c=document.createElement('canvas'); c.width=c.height=size; const ctx=c.getContext('2d');
+  ctx.fillStyle='#07090D'; ctx.fillRect(0,0,size,size);
+  ctx.strokeStyle='#C8A84B'; ctx.lineWidth=size*0.03;
+  ctx.beginPath(); ctx.roundRect(size*0.05,size*0.05,size*0.9,size*0.9,size*0.12); ctx.stroke();
+  const g=ctx.createRadialGradient(size/2,size/2,0,size/2,size/2,size*0.4);
+  g.addColorStop(0,'rgba(200,168,75,0.15)'); g.addColorStop(1,'rgba(200,168,75,0)');
+  ctx.fillStyle=g; ctx.fillRect(0,0,size,size);
+  ctx.fillStyle='#E8C96A'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.font=`bold ${size*0.28}px serif`;
+  ctx.fillText('راہِ',size/2,size*0.38); ctx.fillText('حق',size/2,size*0.65);
+  return c.toDataURL('image/png');
+}
+
+function setupPWA(){
+  try{
+    const i192=generateIcon(192); const i512=generateIcon(512);
+    const ae=document.getElementById('appleIcon'); if(ae) ae.href=i512;
+    const fe=document.getElementById('faviconIcon'); if(fe) fe.href=i192;
+    const manifest={name:'Rah e Haq — راہِ حق',short_name:'راہِ حق',description:'Fiqah-e-Jafaria Debate Engine',start_url:'./',scope:'./',display:'standalone',orientation:'portrait-primary',background_color:'#07090D',theme_color:'#07090D',lang:'ur',icons:[{src:i192,sizes:'192x192',type:'image/png',purpose:'any maskable'},{src:i512,sizes:'512x512',type:'image/png',purpose:'any maskable'}]};
+    const me=document.getElementById('pwaManifest'); if(me) me.href='data:application/manifest+json,'+encodeURIComponent(JSON.stringify(manifest));
+    if('serviceWorker' in navigator&&location.protocol==='https:'){ navigator.serviceWorker.register('./sw.js').catch(()=>{}); }
+  }catch(e){}
+}
+
+let deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{ e.preventDefault(); deferredPrompt=e; if(!localStorage.getItem('rahInstallDismissed')) setTimeout(()=>document.getElementById('installBanner').classList.add('show'),3000); });
+window.addEventListener('appinstalled',()=>{ document.getElementById('installBanner').classList.remove('show'); localStorage.setItem('rahInstallDismissed','1'); });
+function installApp(){ document.getElementById('installBanner').classList.remove('show'); if(deferredPrompt){ deferredPrompt.prompt(); deferredPrompt.userChoice.then(()=>{ deferredPrompt=null; }); } else { alert('To install:\n📱 Android: Tap ⋮ menu → "Add to Home screen"\n🍎 iPhone: Tap Share → "Add to Home Screen"'); } }
+function dismissInstall(){ document.getElementById('installBanner').classList.remove('show'); localStorage.setItem('rahInstallDismissed','1'); }
+
+// ══ INIT ══
+document.addEventListener('DOMContentLoaded',()=>{
+  try{ setupPWA(); }catch(e){}
+  updateOnlineStatus();
+  load(); renderSb();
+  const ids=Object.keys(sessions).sort((a,b)=>b.localeCompare(a));
+  if(ids.length){ activeId=ids[0]; }
+  renderMsgs(); renderFavs();
+  const inp=document.getElementById('chatInput');
+  inp.addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); send(); } });
+  inp.addEventListener('input',()=>resize(inp));
+});
+</script>
+</body>
+</html>
